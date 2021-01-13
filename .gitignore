@@ -1,0 +1,4 @@
+/routing-service/data
+/front-end/node_modules
+/orders-service/node_modules
+front-end/.eslintcache

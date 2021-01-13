@@ -1,0 +1,17 @@
+version: "3.1"
+services:
+  front-end:
+    build: ./front-end
+    ports: 
+      - 3000:3000
+  orders-service:
+    build: ./orders-service
+    ports:
+      - 9000:9000
+  routing-service:
+    build: ./routing-service/
+    ports:
+      - 8989:8989
+    command: /data/toronto.xml
+    volumes: 
+      - ./routing-service/data/:/data
