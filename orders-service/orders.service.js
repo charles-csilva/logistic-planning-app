@@ -5,15 +5,35 @@ const ordersData = [];
 module.exports = {
   name: "orders",
   actions: {
-    list(ctx) {
-      return ordersData;
+    list: {
+      handler(ctx) {
+        return ordersData;
+      },
     },
-    create() {
-      ordersData.push({
-        id: uuidv4(),
-        timestamp: Date.now(),
-        address: { latLng: this.getRandomPoint()},
-      });
+    get: {
+      handler(ctx) {
+        const { id } = ctx.params;
+        return ordersData.find(o => o.id === id);
+      }
+    },
+    update: {
+      handler(ctx) {
+        const { id, shipmentId, shipmentStatus } = ctx.params;
+        const order = ordersData.find(o => o.id === id);
+        order.shipmentId = shipmentId;
+        order.shipmentStatus = shipmentStatus;
+      }
+    },
+    create: {
+      visibility: 'protected',
+      handler() {
+        ordersData.push({
+          id: uuidv4(),
+          timestamp: Date.now(),
+          address: { latLng: this.getRandomPoint() },
+          shipmentStatus: 'PENDING'
+        });
+      },
     },
   },
   methods: {
@@ -30,6 +50,6 @@ module.exports = {
   started() {
     setInterval(() => {
       this.broker.call("orders.create");
-    }, 10000);
+    }, 1000);
   },
 };

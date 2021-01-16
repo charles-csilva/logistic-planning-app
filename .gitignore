@@ -11,3 +11,5 @@ routing-solver-service/.project
 routing-solver-service/.settings
 routing-solver-service/.vscode
 routing-solver-service/dependency-reduced-pom.xml
+
+shipment-service/node_modules

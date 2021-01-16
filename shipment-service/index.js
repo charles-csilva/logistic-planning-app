@@ -7,7 +7,7 @@ const broker = new ServiceBroker({
 broker.createService({
   mixins: [ApiGatewayService],
   settings: {
-    port: 9000,
+    port: 9001,
     routes: [
       {
         path: "/api",

@@ -10,5 +10,5 @@ RUN make test_java
 
 ADD ./ /source
 WORKDIR /source
-# RUN [ "mvn", "clean", "package" ]
+RUN [ "mvn", "clean", "package" ]
 ENTRYPOINT [ "mvn", "spring-boot:run" ]
