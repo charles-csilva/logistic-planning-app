@@ -50,6 +50,6 @@ module.exports = {
   started() {
     setInterval(() => {
       this.broker.call("orders.create");
-    }, 1000);
+    }, 500);
   },
 };
