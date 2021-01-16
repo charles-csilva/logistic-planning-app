@@ -8,6 +8,10 @@ services:
     build: ./orders-service
     ports:
       - 9000:9000
+  routing-solver-service:
+    build: ./routing-solver-service
+    ports:
+      - 8080:8080
   routing-service:
     build: ./routing-service/
     ports:

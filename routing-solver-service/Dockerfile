@@ -10,5 +10,5 @@ RUN make test_java
 
 ADD ./ /source
 WORKDIR /source
-RUN [ "mvn", "clean", "package" ]
-ENTRYPOINT [ "java", "-jar", "./target/routing-solver-service-1.0-SNAPSHOT.jar" ]
+# RUN [ "mvn", "clean", "package" ]
+ENTRYPOINT [ "mvn", "spring-boot:run" ]
