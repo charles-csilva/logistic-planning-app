@@ -13,3 +13,5 @@ routing-solver-service/.vscode
 routing-solver-service/dependency-reduced-pom.xml
 
 shipment-service/node_modules
+
+api-gateway/node_modules

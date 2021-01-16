@@ -1,5 +1,9 @@
 version: "3.1"
 services:
+  api-gateway-service:
+    build: ./api-gateway
+    ports: 
+      - 9000:9000
   redis-service:
     image: redis:rc-alpine3.12
     ports: 
@@ -10,12 +14,8 @@ services:
       - 3000:3000
   orders-service:
     build: ./orders-service
-    ports:
-      - 9000:9000
   shipment-service:
     build: ./shipment-service
-    ports:
-      - 9001:9001
   routing-solver-service:
     build: ./routing-solver-service
     ports:

@@ -3,3 +3,4 @@ ADD ./ /source
 WORKDIR /source
 RUN "yarn"
 ENTRYPOINT [ "node", "index.js" ]
+EXPOSE 9000
