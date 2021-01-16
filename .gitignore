@@ -1,12 +1,13 @@
-/routing-service/data
+routing-service/data
 
-/orders-service/node_modules
+orders-service/node_modules
 
-/front-end/node_modules
-/front-end/.eslintcache
+front-end/node_modules
+front-end/.eslintcache
 
-/routing-solver-service/target
-/routing-solver-service/.classpath
-/routing-solver-service/.project
-/routing-solver-service/.settings
-/routing-solver-service/dependency-reduced-pom.xml
+routing-solver-service/target
+routing-solver-service/.classpath
+routing-solver-service/.project
+routing-solver-service/.settings
+routing-solver-service/.vscode
+routing-solver-service/dependency-reduced-pom.xml
