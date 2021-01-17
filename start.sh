@@ -1,3 +1,3 @@
 #!/bin/bash
-[ ! -d ./routing-service/data/ ] && mkdir ./routing-service/data/ && tar -xf ./routing-service/toronto.tar.xz -C ./routing-service/data/
+[ ! -d ./directions-service/data/ ] && mkdir ./directions-service/data/ && tar -xf ./directions-service/toronto.tar.xz -C ./directions-service/data/
 docker-compose up

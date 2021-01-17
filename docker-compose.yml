@@ -20,10 +20,10 @@ services:
     build: ./routing-solver-service
     ports:
       - 8080:8080
-  routing-service:
-    build: ./routing-service/
+  directions-service:
+    build: ./directions-service/
     ports:
       - 8989:8989
     command: /data/toronto.xml
     volumes: 
-      - ./routing-service/data/:/data
+      - ./directions-service/data/:/data
