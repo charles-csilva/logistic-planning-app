@@ -18,10 +18,9 @@ module.exports = {
     },
     update: {
       handler(ctx) {
-        const { id, shipmentId, shipmentStatus } = ctx.params;
+        const { id, shipmentId } = ctx.params;
         const order = ordersData.find(o => o.id === id);
         order.shipmentId = shipmentId;
-        order.shipmentStatus = shipmentStatus;
       }
     },
     create: {
@@ -31,7 +30,6 @@ module.exports = {
           id: uuidv4(),
           timestamp: Date.now(),
           address: { latLng: this.getRandomPoint() },
-          shipmentStatus: 'PENDING'
         });
       },
     },

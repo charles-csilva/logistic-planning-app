@@ -22,7 +22,7 @@ module.exports = {
       async handler() {
         const orders = await this.broker.call("orders.list");
         const shipmentOrders = orders.filter(
-          (o) => o.shipmentStatus === "PENDING"
+          (o) => o.shipmentId == null
         );
         const shipmentId = uuidv4();
         await Promise.all(
@@ -30,13 +30,13 @@ module.exports = {
             this.broker.call("orders.update", {
               id: o.id,
               shipmentId,
-              shipmentStatus: "PROCESSING",
             })
           )
         );
         const shipment = {
           id: shipmentId,
           orders: shipmentOrders.map((o) => o.id),
+          shipmentStatus: "PROCESSING",
         };
         shipmentData.push(shipment);
         return shipment;
