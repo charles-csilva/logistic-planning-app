@@ -4,8 +4,10 @@
   "main": "index.js",
   "license": "MIT",
   "dependencies": {
+    "axios": "^0.21.1",
     "ioredis": "^4.19.4",
     "moleculer": "^0.14.11",
+    "moleculer-bull": "^0.2.8",
     "uuid": "^8.3.2"
   }
 }

@@ -27,3 +27,5 @@ services:
     command: /data/toronto.xml
     volumes: 
       - ./directions-service/data/:/data
+    logging: 
+      driver: none

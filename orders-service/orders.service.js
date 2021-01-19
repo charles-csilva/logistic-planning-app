@@ -1,3 +1,4 @@
+// @ts-check
 const { v4: uuidv4 } = require("uuid");
 
 const ordersData = [];
@@ -7,8 +8,18 @@ module.exports = {
   actions: {
     list: {
       handler(ctx) {
+        const { idList } = ctx.params;
+        if (idList) {
+          return ordersData.filter(o => idList.includes(o.id));
+        }
         return ordersData;
       },
+    },
+    getOrdersLatLng: {
+      handler(ctx) {
+        const { orderIdList } = ctx.params;
+        return ordersData.filter(o => orderIdList.includes(o.id)).map(o => o.address.latLng);
+      }
     },
     get: {
       handler(ctx) {

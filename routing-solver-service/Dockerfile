@@ -10,5 +10,5 @@ RUN make test_java
 
 ADD ./ /source
 WORKDIR /source
-RUN [ "mvn", "clean", "package" ]
+RUN [ "mvn", "package", "-Dmaven.test.skip=true " ]
 ENTRYPOINT [ "mvn", "spring-boot:run" ]
