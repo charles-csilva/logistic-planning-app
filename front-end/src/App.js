@@ -15,10 +15,27 @@ const App = () => {
 	return (
 		<div className="App">
 			<h1>Logistic Planning</h1>
-			{shipmentList.map(shipment => (
-				<div key={shipment.id} style={{ height: '50vh', width: '50vw' }}>
-					<p></p>
-					<RouteMapComponent points={shipment.points} />
+			{shipmentList.map((shipment, index) => (
+				<div
+					key={shipment.id}
+					style={{
+						height: '80vh',
+						width: '80vw',
+						border: '2px gray solid',
+						borderRadius: 5,
+						margin: 10,
+					}}
+				>
+					<p>{`Route ${index} (${shipment.id})`}</p>
+					{shipment.status === 'ROUTING-PENDING' && <h2>Optimizing route...</h2>}
+					{shipment.status === 'SOLVED' && (
+						<RouteMapComponent
+							points={shipment.route.reduce((pointsSorted, currPointIndex) => {
+								pointsSorted.push(shipment.points[currPointIndex]);
+								return pointsSorted;
+							}, [])}
+						/>
+					)}
 				</div>
 			))}
 		</div>

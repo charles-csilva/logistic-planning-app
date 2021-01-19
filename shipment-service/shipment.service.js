@@ -26,10 +26,10 @@ module.exports = {
     updateRoute: {
       handler(ctx) {
         const { shipmentId, route } = ctx.params;
-        const shipment = shipmentData.find(s => s.id === shipmentId);
-        shipment.status = 'SOLVED';
+        const shipment = shipmentData.find((s) => s.id === shipmentId);
+        shipment.status = "SOLVED";
         shipment.route = route;
-      }
+      },
     },
     generateShipment: {
       async handler() {
