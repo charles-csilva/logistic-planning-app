@@ -35,25 +35,27 @@ module.exports = {
       async handler() {
         const orders = await this.broker.call("orders.list");
         const shipmentOrders = orders.filter((o) => o.shipmentId == null);
-        const shipmentId = uuidv4();
-        await Promise.all(
-          shipmentOrders.map((o) =>
-            this.broker.call("orders.update", {
-              id: o.id,
-              shipmentId,
-            })
-          )
-        );
-        const orderIdList = shipmentOrders.map((o) => o.id);
-        const shipment = {
-          id: shipmentId,
-          orderIdList,
-          status: "ROUTING-PENDING",
-        };
-        shipmentData.push(shipment);
-        await this.broker.call("shipment-routing.createJob", {
-          shipment,
-        });
+        if (shipmentOrders.length > 0) {
+          const shipmentId = uuidv4();
+          await Promise.all(
+            shipmentOrders.map((o) =>
+              this.broker.call("orders.update", {
+                id: o.id,
+                shipmentId,
+              })
+            )
+          );
+          const orderIdList = shipmentOrders.map((o) => o.id);
+          const shipment = {
+            id: shipmentId,
+            orderIdList,
+            status: "ROUTING-PENDING",
+          };
+          shipmentData.push(shipment);
+          await this.broker.call("shipment-routing.createJob", {
+            shipment,
+          });
+        }
       },
     },
   },
