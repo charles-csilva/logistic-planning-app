@@ -8,13 +8,13 @@ module.exports = {
   actions: {
     createJob: {
       async handler(ctx) {
-        const { id: shipmentId, orderIdList } = ctx.params.shipment;
-        const latLngList = await this.broker.call("orders.getOrdersLatLng", {
-          orderIdList,
+        const { shipmentId } = ctx.params;
+        const shipment = await this.broker.call("shipment.get", {
+          id: shipmentId,
         });
         this.createJob(
           "routing-solver-queue",
-          { shipmentId, latLngList },
+          { shipmentId, latLngList: shipment.points },
           { attempts: 18, delay: 10000, removeOnComplete: true }
         );
       },

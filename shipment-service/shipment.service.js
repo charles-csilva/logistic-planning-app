@@ -1,6 +1,7 @@
 // @ts-check
 const { v4: uuidv4 } = require("uuid");
 
+const distributionCenterLatLng = ["43.63682057801007", "-79.39939498901369"];
 const shipmentData = [];
 
 module.exports = {
@@ -8,13 +9,14 @@ module.exports = {
   actions: {
     list: {
       async handler() {
-        const latLngList = await Promise.all(
+        const ordersLatLngList = await Promise.all(
           shipmentData.map((shipment) =>
             this.broker.call("orders.getOrdersLatLng", {
               orderIdList: shipment.orderIdList,
             })
           )
         );
+        const latLngList = ordersLatLngList.map((item) => [distributionCenterLatLng, ...item]);
         return shipmentData.map((shipment, index) => {
           return {
             ...shipment,
@@ -22,6 +24,13 @@ module.exports = {
           };
         });
       },
+    },
+    get: {
+      async handler(ctx) {
+        const { id } = ctx.params;
+        const shipmentList = await this.broker.call('shipment.list');
+        return shipmentList.find(s => s.id === id);
+      }
     },
     updateRoute: {
       handler(ctx) {
@@ -53,7 +62,7 @@ module.exports = {
           };
           shipmentData.push(shipment);
           await this.broker.call("shipment-routing.createJob", {
-            shipment,
+            shipmentId: shipment.id,
           });
         }
       },
