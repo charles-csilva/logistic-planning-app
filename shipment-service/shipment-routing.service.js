@@ -2,9 +2,15 @@
 const QueueService = require("moleculer-bull");
 const axios = require("axios");
 
+const DOCKER_COMPOSE_EXECUTION = process.env.DOCKER_COMPOSE_EXECUTION == "1";
+
 module.exports = {
   name: "shipment-routing",
-  mixins: [QueueService("redis://redis-service:6379")],
+  mixins: [
+    QueueService(
+      `redis://${DOCKER_COMPOSE_EXECUTION ? "redis-service" : "localhost"}:6379`
+    ),
+  ],
   actions: {
     createJob: {
       async handler(ctx) {
@@ -28,9 +34,9 @@ module.exports = {
       async handler(ctx) {
         const { p1, p2 } = ctx.params;
         const response = await axios.default.get(
-          `http://directions-service:8989/route/?point=${p1.join(
-            ","
-          )}&point=${p2.join(",")}`
+          `http://${
+            DOCKER_COMPOSE_EXECUTION ? "directions-service" : "localhost"
+          }:8989/route/?point=${p1.join(",")}&point=${p2.join(",")}`
         );
         return parseInt(response.data.paths[0].distance);
       },
@@ -53,7 +59,9 @@ module.exports = {
         }
       }
       const response = await axios.default.post(
-        "http://routing-solver-service:8080/solve",
+        `http://${
+          DOCKER_COMPOSE_EXECUTION ? "routing-solver-service" : "localhost"
+        }:8080/solve`,
         distanceMatrix
       );
       await this.broker.call("shipment.updateRoute", {
