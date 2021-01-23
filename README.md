@@ -3,7 +3,7 @@
 ![](readme-demo.gif)
 
 This PoC demonstrates how software could be used for managing and planning real-world logistic challenges. \
-This application calculates the shortest (and more cost-effective) route for a vehicle given a starting point (distribution center) and a set of delivery points.
+This application calculates the shortest (and more cost-effective) route for a vehicle given a starting point (the distribution center) and a set of delivery points (randomly generated).
 
 ### Tech stack
 - Node.js 
