@@ -27,3 +27,5 @@ This application calculates the shortest (and more cost-effective) route for a v
 ## Execution
 ### Via Docker Compose
 ``` $ bash run-docker-compose.sh ```
+### Usage
+``` http://localhost:3000 ```
