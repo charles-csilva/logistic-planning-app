@@ -8,7 +8,7 @@ This application calculates the shortest (and more cost-effective) route for a v
 ### Tech stack
 - Node.js 
 - Java
-- React
+- React.js
 - Docker
 - Redis
 
